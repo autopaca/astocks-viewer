@@ -1,0 +1,17 @@
+table.stock {
+    border: 1px solid lightgray;
+}
+th.stock {
+    border-bottom: 1px solid lightgray;
+}
+th.stock:nth-child(1), td.stock:nth-child(1) {
+    border-right: 1px solid lightgray;
+}
+td.stock, th.stock {
+    /*border: 1px solid #dddddd;*/
+    /*text-align: left;*/
+    padding: 8px;
+}
+tr.stock.main-row {
+    background-color: #dddddd;
+}

@@ -9,7 +9,7 @@ import {
   quarterAdjust,
   renderPercent,
   renderValue, renderValueWithUnit, yoy
-} from '@/app/stocks/utils';
+} from '@/app/utils';
 import {
   BalanceSheet,
   CashFlowReport,

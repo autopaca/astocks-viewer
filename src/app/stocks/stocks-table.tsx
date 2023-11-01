@@ -1,6 +1,6 @@
 'use client'
 import { Stock } from '@/app/stocks/interfaces';
-import { getRevenueTables, getStocks, isNumeric, renderValue } from '@/app/stocks/utils';
+import { getRevenueTables, getStocks, isNumeric, renderValue } from '@/app/utils';
 
 import { ColumnsType } from 'antd/lib/table';
 import { Button, Input, Select, Table } from 'antd';
@@ -10,11 +10,8 @@ import { Pinyin } from '@/pinyin';
 import _ from 'lodash';
 
 
-type Exchanges = 'shanghai' | 'shenzhen'
-
-export function StocksTable() {
-  const [exchange, setExchange] = useState<Exchanges>('shanghai');
-  const [stocksData, setStocksData] = useState<Stock[]>([]);
+export function StocksTable(props: {initStocks: Stock[]}) {
+  const [stocksData, setStocksData] = useState<Stock[]>(props.initStocks);
   const [filteredData, setFilteredData] = useState<Stock[]>();
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -108,30 +105,17 @@ export function StocksTable() {
     },
   ];
 
-  const handleChange = (value: Exchanges) => {
-    setExchange(value);
-  };
-
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      const stocks = await getStocks(exchange);
-      setStocksData(stocks);
-      setFilteredData(stocks);
-      setLoading(false);
-    })();
-  }, [exchange]);
+  // useEffect(() => {
+  //   (async () => {
+  //     setLoading(true);
+  //     const stocks = await getStocks();
+  //     setStocksData(stocks);
+  //     setFilteredData(stocks);
+  //     setLoading(false);
+  //   })();
+  // }, []);
 
   return (<div>
-    <Select
-      defaultValue='shanghai'
-      style={{width: 120}}
-      onChange={handleChange}
-      options={[
-        {value: 'shanghai', label: '上交所'},
-        {value: 'shenzhen', label: '深交所'},
-      ]}
-    />
     <div>
       公司代码: <Input value={searchCode} onChange={e => setSearchCode(e.target.value)}/>
       {/*<Button onClick={searchByCode}>Search</Button>*/}
